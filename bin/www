@@ -6,14 +6,7 @@
 
 var app = require('../app');
 var debug = require('debug')('3dmap-fixed-helper:server');
-var https = require('node:https');
-var fs = require('node:fs');
-var path = require('node:path');
-
-var options = {
-  key: fs.readFileSync(path.resolve(__dirname, '../ssl/key.pem')),
-  cert: fs.readFileSync(path.resolve(__dirname, '../ssl/cert.pem'))
-};
+var http = require('node:http');
 
 /**
  * Get port from environment and store in Express.
@@ -26,7 +19,7 @@ app.set('port', port);
  * Create HTTP server.
  */
 
-var server = https.createServer(options, app);
+var server = http.createServer(app);
 
 /**
  * Listen on provided port, on all network interfaces.
